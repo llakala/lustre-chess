@@ -1,0 +1,174 @@
+body {
+  background: #333;
+  font-size: 200%;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+}
+
+#board {
+  width: 16em;
+  height: 16em;
+  background-position: 0 0, 2em 2em;
+  background-size: 4em 4em;
+  background-image: linear-gradient(45deg, #d18b47 25%, transparent 25%, transparent 75%, #d18b47 75%, #d18b47 100%),linear-gradient(45deg, #d18b47 25%, #ffce9e 25%, #ffce9e 75%, #d18b47 75%, #d18b47 100%);
+}
+
+#app {
+  position: relative;
+  top: -16em;
+  width: 16em;
+  height: 16em;
+}
+
+#app > div {
+  width: 100%;
+  height: 100%;
+}
+
+#pieces {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#moves {
+  z-index: 1;
+  position: relative;
+  top: -16em;
+  width: 16em;
+  height: 16em;
+  pointer-events: none;
+}
+
+.cell {
+  width: 2em;
+  height: 2em;
+  text-align: center;
+}
+
+.cell > span {
+  vertical-align: middle;
+}
+
+.black {
+  color: #222;
+}
+
+.white {
+  color: #eee;
+}
+
+.selected {
+  box-shadow: inset 0 0 10px #0f0;
+}
+
+.move-arrow {
+  stroke: red;
+  stroke-width: 0.05;
+  fill: tomato;
+}
+
+.human {
+  cursor: pointer;
+}
+
+.computer {
+  cursor: wait;
+}
+
+#fen {
+  position: relative;
+  top: -32em;
+  font-size: 50%;
+  color: white;
+}
+
+#notifications {
+  position: absolute;
+  top: 1em;
+  width: 100%;
+}
+
+#notification {
+  width: 75%;
+  font-size: 50%;
+  color: white;
+  background: tomato;
+  border: solid red 1px;
+  margin-inline: auto;
+  padding: 0.5em;
+  border-radius: 0.25em;
+}
+
+.game-not-over {
+  display: none;
+}
+
+.game-over {
+  display: block;
+  position: absolute;
+  top: 5.5em;
+  left: 3.5em;
+  width: 9em;
+  height: 5em;
+  line-height: 5em;
+  background-color: tomato;
+  border-radius: 1em;
+  margin: 0;
+  text-align: center;
+  box-shadow: 0.1em 0.05em 0.05em red;
+}
+
+.game-over > span {
+  font-size: 250%;
+}
+
+#lobby {
+  max-width: fit-content;
+  margin-inline: auto;
+  background: #333;
+  border-radius: 1em;
+  padding: 1em;
+  margin-top: 2.5em;
+}
+
+#mode-select {
+  display: flex;
+  flex-flow: row;
+  gap: 0.5em;
+
+}
+
+#mode-select > div {
+  background: #888;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  cursor: default;
+}
+
+#mode-select > div.choose {
+  cursor: pointer;
+}
+
+#lobby input {
+  background: #888;
+  color: white;
+  font-family: mono;
+  width: 80%;
+  margin-left: 0.5em;
+  padding: 0.5em;
+  border: 0.1em solid #555;
+  border-radius: 0.5em;
+}
