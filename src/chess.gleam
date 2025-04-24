@@ -121,9 +121,7 @@ type Message {
 }
 
 fn init(_flags) -> #(Model, Effect(Message)) {
-  // let #(game_state, eff) = state_from_game(new_game())
-  // #(Game(game_state), effect.map(eff, GameMessage))
-  #(PreGame(PreGameModel("http://localhost:8000")), effect.none())
+  #(PreGame(PreGameModel("http://127.0.0.1:1234")), effect.none())
 }
 
 fn update(model: Model, msg: Message) -> #(Model, Effect(Message)) {
