@@ -56,10 +56,11 @@ div {
   width: 2em;
   height: 2em;
   text-align: center;
+  vertical-align: middle;
 }
 
 .cell > span {
-  vertical-align: middle;
+  font-size: 140%;
 }
 
 .black {
@@ -68,6 +69,7 @@ div {
 
 .white {
   color: #eee;
+  text-shadow: #444 0.04em 0.04em;
 }
 
 .selected {

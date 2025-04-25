@@ -366,7 +366,7 @@ fn view_pre_game(model: PreGameModel) {
       html.div([attribute.id("mode-select")], [
         html.div([], [
           html.div([attribute.class("black")], [html.text(black_king_symbol)]),
-          html.div([attribute.class("white")], [html.text(black_king_symbol)]),
+          html.div([attribute.class("white")], [html.text(white_king_symbol)]),
         ]),
         html.div(
           [attribute.class("choose"), event.on_click(Choose(Human, Human))],
@@ -415,25 +415,7 @@ fn view_game_state(game_state: GameState) {
     case cell {
       NoPiece -> html.div(common_attrs, [])
       Piece(kind, side) -> {
-        let symbol = case kind, side {
-          Bishop, White -> white_bishop_symbol
-          Bishop, Black -> black_bishop_symbol
-
-          King, White -> white_king_symbol
-          King, Black -> black_king_symbol
-
-          Knight, White -> white_knight_symbol
-          Knight, Black -> black_knight_symbol
-
-          Pawn, White -> white_pawn_symbol
-          Pawn, Black -> black_pawn_symbol
-
-          Queen, White -> white_queen_symbol
-          Queen, Black -> black_queen_symbol
-
-          Rook, White -> white_rook_symbol
-          Rook, Black -> black_rook_symbol
-        }
+        let symbol = piece_symbol(kind, side)
 
         html.div([attribute.class(side_to_string(side)), ..common_attrs], [
           html.span([], [html.text(symbol)]),
@@ -477,7 +459,9 @@ fn view_game_state(game_state: GameState) {
           case game_state.phase {
             GameOver(Win(side)) ->
               html.span([attribute.class(side_to_string(side))], [
-                html.text(black_rook_symbol <> "👑" <> black_knight_symbol),
+                html.text(
+                  piece_symbol(Rook, side) <> "👑" <> piece_symbol(Knight, side),
+                ),
               ])
             GameOver(Draw(_kind)) -> html.span([], [html.text("😴")])
             _ -> html.span([], [])
@@ -495,6 +479,28 @@ fn view_game_state(game_state: GameState) {
       }),
     ],
   )
+}
+
+fn piece_symbol(kind: Kind, side: Side) -> String {
+  case kind, side {
+    Bishop, White -> white_bishop_symbol
+    Bishop, Black -> black_bishop_symbol
+
+    King, White -> white_king_symbol
+    King, Black -> black_king_symbol
+
+    Knight, White -> white_knight_symbol
+    Knight, Black -> black_knight_symbol
+
+    Pawn, White -> white_pawn_symbol
+    Pawn, Black -> black_pawn_symbol
+
+    Queen, White -> white_queen_symbol
+    Queen, Black -> black_queen_symbol
+
+    Rook, White -> white_rook_symbol
+    Rook, Black -> black_rook_symbol
+  }
 }
 
 fn side_to_string(side: Side) -> String {
