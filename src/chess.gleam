@@ -15,17 +15,29 @@ import lustre/element/svg
 import lustre/event
 import lustre_http
 
-const symbol_king = "♚"
+const white_king_symbol = "♔"
 
-const symbol_queen = "♛"
+const black_king_symbol = "♚"
 
-const symbol_rook = "♜"
+const white_queen_symbol = "♕"
 
-const symbol_bishop = "♝"
+const black_queen_symbol = "♛"
 
-const symbol_knight = "♞"
+const white_rook_symbol = "♖"
 
-const symbol_pawn = "♟"
+const black_rook_symbol = "♜"
+
+const white_bishop_symbol = "♗"
+
+const black_bishop_symbol = "♝"
+
+const white_knight_symbol = "♘"
+
+const black_knight_symbol = "♞"
+
+const white_pawn_symbol = "♙"
+
+const black_pawn_symbol = "♟"
 
 pub fn main() {
   let app = lustre.application(init, update, view)
@@ -346,8 +358,8 @@ fn view_pre_game(model: PreGameModel) {
     html.div([attribute.id("lobby")], [
       html.div([attribute.id("mode-select")], [
         html.div([], [
-          html.div([attribute.class("black")], [html.text(symbol_king)]),
-          html.div([attribute.class("white")], [html.text(symbol_king)]),
+          html.div([attribute.class("black")], [html.text(black_king_symbol)]),
+          html.div([attribute.class("white")], [html.text(black_king_symbol)]),
         ]),
         html.div(
           [attribute.class("choose"), event.on_click(Choose(Human, Human))],
@@ -396,14 +408,26 @@ fn view_game_state(game_state: GameState) {
     case cell {
       NoPiece -> html.div(common_attrs, [])
       Piece(kind, side) -> {
-        let symbol = case kind {
-          King -> symbol_king
-          Queen -> symbol_queen
-          Rook -> symbol_rook
-          Bishop -> symbol_bishop
-          Knight -> symbol_knight
-          Pawn -> symbol_pawn
+        let symbol = case kind, side {
+          Bishop, White -> white_bishop_symbol
+          Bishop, Black -> black_bishop_symbol
+
+          King, White -> white_king_symbol
+          King, Black -> black_king_symbol
+
+          Knight, White -> white_knight_symbol
+          Knight, Black -> black_knight_symbol
+
+          Pawn, White -> white_pawn_symbol
+          Pawn, Black -> black_pawn_symbol
+
+          Queen, White -> white_queen_symbol
+          Queen, Black -> black_queen_symbol
+
+          Rook, White -> white_rook_symbol
+          Rook, Black -> black_rook_symbol
         }
+
         html.div([attribute.class(side_to_string(side)), ..common_attrs], [
           html.span([], [html.text(symbol)]),
         ])
@@ -446,7 +470,7 @@ fn view_game_state(game_state: GameState) {
           case game_state.phase {
             GameOver(Win(side)) ->
               html.span([attribute.class(side_to_string(side))], [
-                html.text(symbol_rook <> "👑" <> symbol_knight),
+                html.text(black_rook_symbol <> "👑" <> black_knight_symbol),
               ])
             GameOver(Draw(_kind)) -> html.span([], [html.text("😴")])
             _ -> html.span([], [])
