@@ -284,6 +284,13 @@ fn api_move(game: ChessGame, url: String) {
     url <> "/move",
     json.object([
       #("fen", json.string(fen(game))),
+      #("turn", {
+        let side = case side_to_move_ffi(game) {
+          "w" -> "white"
+          _ -> "black"
+        }
+        json.string(side)
+      }),
       #("failed_moves", json.array([], json.string)),
     ]),
     lustre_http.expect_text(ApiReturnedMove),
